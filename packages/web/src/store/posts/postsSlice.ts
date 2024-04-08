@@ -1,6 +1,6 @@
 /* eslint-disable no-param-reassign */
 import type { Post } from '@bbpl/common';
-import { createSlice } from '@reduxjs/toolkit';
+import { type PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { fetchPosts } from './fetchPosts';
 import type { AsyncSliceState } from '../AsyncSliceState';
 
@@ -15,7 +15,13 @@ const initialState: PostsState = {
 export const postsSlice = createSlice({
   name: 'posts',
   initialState,
-  reducers: {},
+  reducers: {
+    setPosts: (state, action: PayloadAction<Post[]>) => {
+      state.isLoading = false;
+      state.error = null;
+      state.value = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchPosts.pending, (state) => {
@@ -32,3 +38,5 @@ export const postsSlice = createSlice({
       });
   },
 });
+
+export const { setPosts } = postsSlice.actions;
