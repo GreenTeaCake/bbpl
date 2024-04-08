@@ -1,0 +1,10 @@
+services:
+  bbpl-web:
+    build:
+      context: .
+      target: web
+      tags:
+        - 'bbpl-web:latest'
+    image: bbpl-web:latest
+    ports:
+      - '5173:80'

@@ -1,0 +1,36 @@
+{
+  "name": "@bbpl/web",
+  "description": "BBPL Web Package",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "vite",
+    "build": "tsc && vite build",
+    "analyze": "vite-bundle-visualizer",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@bbpl/common": "workspace:^",
+    "@reduxjs/toolkit": "^2.2.2",
+    "lodash": "^4.17.21",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-redux": "^9.1.0",
+    "react-router-dom": "^6.22.3"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.17.0",
+    "@types/react": "^18.2.66",
+    "@types/react-dom": "^18.2.22",
+    "@vitejs/plugin-react": "^4.2.1",
+    "typescript": "^5.2.2",
+    "vite": "^5.2.0",
+    "vite-bundle-visualizer": "^1.1.0",
+    "vite-tsconfig-paths": "^4.3.2",
+    "vitest": "^1.4.0"
+  }
+}

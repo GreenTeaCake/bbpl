@@ -1,0 +1,35 @@
+{
+  "name": "@bbpl/common",
+  "description": "BBPL Common Package",
+  "private": true,
+  "version": "0.0.1",
+  "type": "module",
+  "main": "./dist/common.umd.cjs",
+  "module": "./dist/common.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "default": "./dist/common.js",
+        "types": "./dist/index.d.ts"
+      },
+      "require": {
+        "default": "./dist/common.umd.cjs",
+        "types": "./dist/index.d.ts"
+      }
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc && vite build",
+    "build:watch": "vite build --watch"
+  },
+  "devDependencies": {
+    "@types/node": "^20.3.1",
+    "typescript": "^5.4.3",
+    "vite": "^5.2.6",
+    "vite-plugin-dts": "^3.8.0"
+  }
+}

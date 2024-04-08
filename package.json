@@ -1,0 +1,47 @@
+{
+  "name": "@bbpl/monorepo",
+  "description": "BBPL Monorepo",
+  "version": "0.0.1",
+  "private": true,
+  "author": "GreenTeaCake <167279+GreenTeaCake@users.noreply.github.com>",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:GreenTeaCake/bbpl.git"
+  },
+  "engines": {
+    "node": ">=20.0.0",
+    "pnpm": ">=8.15.5"
+  },
+  "packageManager": "pnpm@8.15.5",
+  "scripts": {
+    "clean": "pnpm exec rimraf -g **/.DS_Store **/coverage **/dist **/node_modules",
+    "lint": "eslint . --ext js,jsx,ts,tsx --fix --ignore-path .gitignore --report-unused-disable-directives --max-warnings 0",
+    "format": "prettier --write --ignore-unknown .",
+    "prepare": "husky"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^7.5.0",
+    "@typescript-eslint/parser": "^7.5.0",
+    "eslint": "^8.57.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-airbnb-typescript": "^18.0.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-plugin-jsx-a11y": "^6.8.0",
+    "eslint-plugin-react": "^7.34.1",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.6",
+    "husky": "^9.0.11",
+    "lint-staged": "^15.2.2",
+    "prettier": "^3.2.5",
+    "rimraf": "^5.0.5"
+  },
+  "lint-staged": {
+    "**/*.{js,jsx,ts,tsx}": [
+      "eslint --fix --ignore-path .gitignore --report-unused-disable-directives --max-warnings 0"
+    ],
+    "*": [
+      "prettier --write --ignore-unknown"
+    ]
+  }
+}
