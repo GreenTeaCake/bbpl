@@ -1,4 +1,4 @@
-import type { PostData } from './getFilteredPostData';
+import type { PostData } from './PostData';
 import type { FilterBy } from '../filters';
 
 type Predicate = (postData: PostData) => boolean;

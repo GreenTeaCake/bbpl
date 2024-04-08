@@ -1,6 +1,6 @@
 import { describe, expect, test } from 'vitest';
-import type { PostData } from './getFilteredPostData';
-import { getPostBodyPredicate, getUserIdPredicate, getUsernamePredicate } from './predicates';
+import type { PostData } from './PostData';
+import { getPostBodyPredicate, getUserIdPredicate, getUsernamePredicate } from './predicateFactory';
 
 const POST_DATA: PostData = {
   post: {

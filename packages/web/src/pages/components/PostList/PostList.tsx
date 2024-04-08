@@ -1,10 +1,11 @@
 import { useState, type FC } from 'react';
-import { getFilteredPostData, useAppSelector } from 'store';
+import { useAppSelector } from 'store';
 import Stack from '@mui/material/Stack';
+import { getPostData } from 'store/getPostData/getPostData';
 import { PostListItem } from './PostListItem';
 
 export const PostList: FC = () => {
-  const postData = useAppSelector(getFilteredPostData);
+  const postData = useAppSelector(getPostData);
 
   const [selectedId, setSelectedId] = useState<number | null>(null);
 

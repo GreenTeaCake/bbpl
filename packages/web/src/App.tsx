@@ -1,4 +1,4 @@
-import { PostList } from 'pages/components/PostList';
+import { PostsPage } from 'pages/PostsPage/PostsPage';
 import { useEffect, type FC } from 'react';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { fetchPosts, fetchUsers, useAppDispatch } from 'store';
@@ -6,7 +6,7 @@ import { fetchPosts, fetchUsers, useAppDispatch } from 'store';
 const ROUTER = createBrowserRouter([
   {
     path: '/',
-    element: <PostList />,
+    element: <PostsPage />,
   },
 ]);
 

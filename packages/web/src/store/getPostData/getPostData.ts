@@ -1,15 +1,10 @@
 import { createSelector } from '@reduxjs/toolkit';
-import type { Post, User } from '@bbpl/common';
-import { getUsersMap } from 'store/users';
+import { getUsersMap } from 'store/users/getUsersMap';
+import { FACTORIES } from './predicateFactory';
 import type { AppState } from '../store';
-import { FACTORIES } from './predicates';
+import type { PostData } from './PostData';
 
-export type PostData = {
-  post: Post;
-  user?: User | undefined;
-};
-
-export const getFilteredPostData = createSelector(
+export const getPostData = createSelector(
   [
     getUsersMap,
     (state: AppState) => state.posts.value,
