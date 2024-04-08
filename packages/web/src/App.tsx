@@ -1,8 +1,7 @@
 import { PostList } from 'pages/components/PostList';
 import { useEffect, type FC } from 'react';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import { useAppDispatch } from 'store';
-import { fetchPosts } from 'store/posts';
+import { fetchPosts, fetchUsers, useAppDispatch } from 'store';
 
 const ROUTER = createBrowserRouter([
   {
@@ -16,8 +15,12 @@ export const App: FC = () => {
 
   useEffect(() => {
     // wait no location, pre-fetch data
-    const promise = dispatch(fetchPosts());
-    return () => promise.abort();
+    const postsPromise = dispatch(fetchPosts());
+    const usersPromise = dispatch(fetchUsers());
+    return () => {
+      postsPromise.abort();
+      usersPromise.abort();
+    };
   }, [dispatch]);
 
   return <RouterProvider router={ROUTER} />;
