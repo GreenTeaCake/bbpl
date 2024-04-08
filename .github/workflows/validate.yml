@@ -1,0 +1,43 @@
+# https://docs.github.com/en/actions
+
+on: push
+
+jobs:
+  check-code:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v3
+        with:
+          version: 8
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile --ignore-scripts
+
+      - name: Build
+        run: pnpm run -r build
+
+      - name: Unit Test
+        run: pnpm run -r test
+
+      - name: Lint
+        run: pnpm run lint
+
+      - name: Format
+        run: pnpm run format
+
+      - name: Check for uncommitted changes
+        run: |
+          if [[ `git status --porcelain` ]]; then
+            echo "Uncommitted changes found after running format"
+            exit 1
+          fi

@@ -1,0 +1,9 @@
+**/.git
+**/.gihub
+**/.husky
+**/.vscode
+**/coverage
+**/dist
+**/node_modules
+**/*.db
+**/*.md
