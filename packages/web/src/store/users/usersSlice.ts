@@ -1,32 +1,32 @@
 /* eslint-disable no-param-reassign */
-import type { Post } from '@bbpl/common';
+import type { User } from '@bbpl/common';
 import { createSlice } from '@reduxjs/toolkit';
-import { fetchPosts } from './fetchPosts';
+import { fetchUsers } from './fetchUsers';
 import type { AsyncSliceState } from '../AsyncSliceState';
 
-export type PostsState = AsyncSliceState<Post>;
+export type UsersState = AsyncSliceState<User>;
 
-const initialState: PostsState = {
+const initialState: UsersState = {
   value: [],
   isLoading: false,
   error: null,
 };
 
-export const postsSlice = createSlice({
-  name: 'posts',
+export const usersSlice = createSlice({
+  name: 'users',
   initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(fetchPosts.pending, (state) => {
+      .addCase(fetchUsers.pending, (state) => {
         state.isLoading = true;
       })
-      .addCase(fetchPosts.fulfilled, (state, action) => {
+      .addCase(fetchUsers.fulfilled, (state, action) => {
         state.isLoading = false;
         state.error = null;
         state.value = action.payload;
       })
-      .addCase(fetchPosts.rejected, (state, action) => {
+      .addCase(fetchUsers.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.error.message ?? null;
       });
