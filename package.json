@@ -19,9 +19,15 @@
     "format": "prettier --write --ignore-unknown .",
     "prepare": "husky"
   },
+  "pnpm": {
+    "overrides": {
+      "@typescript-eslint/eslint-plugin": "7.4.0",
+      "@typescript-eslint/parser": "7.4.0"
+    }
+  },
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^7.5.0",
-    "@typescript-eslint/parser": "^7.5.0",
+    "@typescript-eslint/eslint-plugin": "7.4.0",
+    "@typescript-eslint/parser": "7.4.0",
     "eslint": "^8.57.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-airbnb-typescript": "^18.0.0",
