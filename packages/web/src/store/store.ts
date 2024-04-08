@@ -1,19 +1,17 @@
-import { configureStore, createAsyncThunk } from '@reduxjs/toolkit';
+import { configureStore } from '@reduxjs/toolkit';
 import { useDispatch } from 'react-redux';
+import { type PostsState, postsSlice } from './posts';
 
-export const store = configureStore({
-  reducer: {},
+export type AppState = {
+  posts: PostsState;
+};
+
+export const store = configureStore<AppState>({
+  reducer: {
+    posts: postsSlice.reducer,
+  },
 });
-
-export type AppState = ReturnType<typeof store.getState>;
 
 export type AppDispatch = typeof store.dispatch;
 
-export type AppThunkConfig = {
-  state: AppState;
-  dispatch: AppDispatch;
-};
-
 export const useAppDispatch: () => AppDispatch = useDispatch;
-
-export const createAppThunk = createAsyncThunk.withTypes<AppThunkConfig>();
