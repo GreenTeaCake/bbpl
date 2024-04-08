@@ -1,0 +1,54 @@
+import type { PostData } from './getFilteredPostData';
+import type { FilterBy } from '../filters';
+
+type Predicate = (postData: PostData) => boolean;
+
+type PredicateFactory = (query: string) => Predicate;
+
+function stubTrue() {
+  return true;
+}
+
+export const getUsernamePredicate: PredicateFactory = (query) => {
+  if (!query.trim()) {
+    return stubTrue;
+  }
+
+  const regexp = new RegExp(query.trim(), 'ig');
+
+  return function usernamePredicate(postData) {
+    const username = postData.user?.username;
+    return username ? regexp.test(username) : false;
+  };
+};
+
+export const getUserIdPredicate: PredicateFactory = (query) => {
+  if (!query.trim()) {
+    return stubTrue;
+  }
+
+  const userId = Number.parseInt(query.trim(), 10);
+
+  return function userIdPredicate(postData) {
+    return postData.post.userId === userId;
+  };
+};
+
+export const getPostBodyPredicate: PredicateFactory = (query) => {
+  if (!query.trim()) {
+    return stubTrue;
+  }
+
+  const regexp = new RegExp(query.trim(), 'ig');
+
+  return function postBodyPredicate(postData) {
+    return regexp.test(postData.post.body);
+  };
+};
+
+export const FACTORIES: Record<FilterBy, PredicateFactory[]> = {
+  ALL: [getUsernamePredicate, getUserIdPredicate, getPostBodyPredicate],
+  USERNAME: [getUsernamePredicate],
+  USER_ID: [getUserIdPredicate],
+  POST_BODY: [getPostBodyPredicate],
+};

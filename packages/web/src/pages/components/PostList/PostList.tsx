@@ -1,20 +1,18 @@
 import { useState, type FC } from 'react';
-import { getUsersMap, useAppSelector } from 'store';
+import { getFilteredPostData, useAppSelector } from 'store';
 import Stack from '@mui/material/Stack';
-import { useSelector } from 'react-redux';
 import { PostListItem } from './PostListItem';
 
 export const PostList: FC = () => {
-  const posts = useAppSelector((state) => state.posts.value);
-  const usersMap = useSelector(getUsersMap);
+  const postData = useAppSelector(getFilteredPostData);
 
   const [selectedId, setSelectedId] = useState<number | null>(null);
 
   return (
     <Stack spacing={2}>
-      {posts.map((post) => {
-        const { id, userId } = post;
-        const user = usersMap.get(userId);
+      {postData.map((postDataEntry) => {
+        const { post, user } = postDataEntry;
+        const { id } = post;
         return (
           <PostListItem
             isSelected={id === selectedId}
