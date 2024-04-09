@@ -88,15 +88,12 @@ export const CommentaryListItem: FC<CommentaryListItemProps> = (props) => {
     (input: Option[], state: FilterOptionsState<Option>): Option[] => {
       const filtered = FILTER(input, state);
       const { inputValue } = state;
-      if (inputValue.trim() !== '') {
-        const exist = tags.includes(inputValue);
-        if (!exist) {
-          filtered.push({ inputValue, label: `+ "${inputValue}"` });
-        }
+      if (inputValue.trim() !== '' && !filtered.length) {
+        filtered.push({ inputValue, label: `+ "${inputValue}"` });
       }
       return filtered;
     },
-    [tags],
+    [],
   );
 
   return (
