@@ -4,13 +4,25 @@ import { Provider } from 'react-redux';
 import { store } from 'store';
 import { THEME } from 'theme';
 import { getDisplayName } from 'pages/getDisplayName';
+import { MemoryRouter, Route, Routes } from 'react-router-dom';
 
-export function withTestEnv<P extends object>(Component: ComponentType<P>): ComponentType<P> {
-  const TestEnvWrapper: FC<P> = (props) => {
+type WrapperProps = {
+  initialEntries: string[];
+};
+
+export function withTestEnv<P extends object>(
+  Component: ComponentType<P>,
+): ComponentType<P & WrapperProps> {
+  const TestEnvWrapper: FC<P & WrapperProps> = (props) => {
+    const { initialEntries } = props;
     return (
       <ThemeProvider theme={THEME}>
         <Provider store={store}>
-          <Component {...props} />
+          <MemoryRouter initialEntries={initialEntries}>
+            <Routes>
+              <Route path="*" element={<Component {...props} />} />
+            </Routes>
+          </MemoryRouter>
         </Provider>
       </ThemeProvider>
     );

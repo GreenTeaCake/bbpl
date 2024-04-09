@@ -1,13 +1,14 @@
-import { useState, type FC } from 'react';
+import type { FC } from 'react';
 import { useAppSelector } from 'store';
 import Stack from '@mui/material/Stack';
-import { getPostData } from 'store/getPostData/getPostData';
-import { PostListItem } from './PostListItem';
+import { getPostData } from 'store/selectors/getPostData';
+import { useParams } from 'react-router-dom';
+import { PostListItemMemoized } from './PostListItem';
 
 export const PostList: FC = () => {
   const postData = useAppSelector(getPostData);
 
-  const [selectedId, setSelectedId] = useState<number | null>(null);
+  const { id: selectedPostId } = useParams();
 
   return (
     <Stack spacing={2}>
@@ -15,10 +16,9 @@ export const PostList: FC = () => {
         const { post, user } = postDataEntry;
         const { id } = post;
         return (
-          <PostListItem
-            isSelected={id === selectedId}
+          <PostListItemMemoized
+            isSelected={`${id}` === selectedPostId}
             key={id}
-            onClick={setSelectedId}
             post={post}
             user={user}
           />

@@ -8,7 +8,7 @@ import { PostFilter } from './PostFilter';
 const PostFilterWithTestEnv = withTestEnv(PostFilter);
 
 const setUpView = () => {
-  render(<PostFilterWithTestEnv />);
+  render(<PostFilterWithTestEnv initialEntries={['/posts']} />);
 };
 
 describe('PostFilter', () => {

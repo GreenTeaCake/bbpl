@@ -1,40 +1,39 @@
-import { useCallback, type FC, type MouseEvent } from 'react';
+import { memo, useCallback, type FC, type MouseEvent } from 'react';
 import type { Post, User } from '@bbpl/common';
 import Card from '@mui/material/Card';
 import CardActionArea from '@mui/material/CardActionArea';
 import CardContent from '@mui/material/CardContent';
 import CardHeader from '@mui/material/CardHeader';
+import { useNavigate } from 'react-router-dom';
 
 export type PostListItemProps = {
   isSelected?: boolean;
-  onClick?: (postId: number) => void;
   post: Post;
   user?: User | undefined;
 };
 
 export const PostListItem: FC<PostListItemProps> = (props) => {
   const {
-    isSelected: isSelectd,
-    onClick,
+    isSelected,
     post: { body, id, title },
     user,
   } = props;
 
+  const navigate = useNavigate();
+
   const handleCardClick = useCallback(
     (event: MouseEvent<HTMLButtonElement>) => {
       event.preventDefault();
-      if (onClick) {
-        onClick(id);
-      }
+      navigate(`/posts/${id}/commentaries`);
     },
-    [onClick, id],
+    [id, navigate],
   );
 
   return (
     <Card
       sx={{
         outline: (theme) => {
-          return isSelectd ? `2px solid ${theme.palette.secondary.main}` : undefined;
+          return isSelected ? `2px solid ${theme.palette.secondary.main}` : undefined;
         },
       }}
     >
@@ -45,3 +44,5 @@ export const PostListItem: FC<PostListItemProps> = (props) => {
     </Card>
   );
 };
+
+export const PostListItemMemoized = memo(PostListItem);
