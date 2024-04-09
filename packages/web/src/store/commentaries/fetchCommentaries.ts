@@ -8,6 +8,6 @@ export const fetchCommentaries = createAppThunk<Commentary[], number>(
   async (postId, thunkApi) => {
     const queryKey = ['posts', postId, 'comments'];
     const commentaries = await getFromApi<Commentary[]>(queryKey)(thunkApi.signal);
-    return commentaries.map(populateTags);
+    return commentaries.map(populateTags).map((c) => ({ ...c, replies: [] }));
   },
 );

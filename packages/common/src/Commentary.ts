@@ -7,4 +7,5 @@ export type Commentary = {
   email: string;
   body: string;
   tags?: Tag[];
+  replies: string[];
 };
