@@ -12,4 +12,5 @@ RUN pnpm run -r build
 FROM nginx:1.25-alpine-slim AS web
 EXPOSE 80
 COPY --from=build /build/packages/web/dist /usr/share/nginx/html
+COPY --from=build /build/nginx.conf /etc/nginx/conf.d/default.conf
 CMD ["nginx", "-g", "daemon off;"]

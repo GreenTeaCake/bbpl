@@ -4,7 +4,7 @@
 
 ```shell
 $ docker compose up --build
-# web is at http://localhost:5173/
+# web is at http://localhost:5173/posts
 ```
 
 ## Full Startup Flow
