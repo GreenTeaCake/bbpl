@@ -1,4 +1,5 @@
 import {
+  Fragment,
   type MouseEvent,
   type SyntheticEvent,
   memo,
@@ -22,6 +23,7 @@ import IconButton from '@mui/material/IconButton';
 import Stack from '@mui/material/Stack';
 import SendIcon from '@mui/icons-material/Send';
 import TextField, { type TextFieldVariants } from '@mui/material/TextField';
+import Typography from '@mui/material/Typography';
 import { addReply, updateTags } from 'store/commentaries';
 import { useAppDispatch } from 'store';
 import type { FilterOptionsState } from '@mui/material';
@@ -107,12 +109,23 @@ export const CommentaryListItem: FC<CommentaryListItemProps> = (props) => {
               {replies.map((text, textIndex) => {
                 const isLast = textIndex === replies.length - 1;
                 return (
-                  <>
-                    <ListItem key={text}>
-                      <ListItemText>{text}</ListItemText>
+                  <Fragment key={text}>
+                    <ListItem>
+                      <ListItemText>
+                        <Typography
+                          variant="caption"
+                          sx={{
+                            whiteSpace: 'pre-wrap',
+                            wordWrap: 'break-word',
+                            wordBreak: 'break-all',
+                          }}
+                        >
+                          {text}
+                        </Typography>
+                      </ListItemText>
                     </ListItem>
-                    {!isLast && <Divider />}
-                  </>
+                    {!isLast && <Divider key={`divider-${text}`} />}
+                  </Fragment>
                 );
               })}
             </List>
