@@ -1,6 +1,7 @@
 /* eslint-disable no-param-reassign */
-import type { Commentary } from '@bbpl/common';
-import { createSlice } from '@reduxjs/toolkit';
+import type { Commentary, Tag } from '@bbpl/common';
+import { type PayloadAction, createSlice } from '@reduxjs/toolkit';
+import partition from 'lodash/fp/partition';
 import { fetchCommentaries } from './fetchCommentaries';
 import type { AsyncSliceState } from '../AsyncSliceState';
 
@@ -12,10 +13,23 @@ const initialState: CommentariesState = {
   error: null,
 };
 
+type UpdateTags = {
+  commentaryId: number;
+  tags: Tag[];
+};
+
 export const commentariesSlice = createSlice({
   name: 'commentaries',
   initialState,
-  reducers: {},
+  reducers: {
+    updateTags: (state, action: PayloadAction<UpdateTags>) => {
+      const { commentaryId, tags } = action.payload;
+      const [[target], rest] = partition<Commentary>((c) => c.id === commentaryId)(state.value);
+      if (target) {
+        state.value = [...rest, { ...target, tags }];
+      }
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchCommentaries.pending, (state) => {
@@ -36,3 +50,5 @@ export const commentariesSlice = createSlice({
       });
   },
 });
+
+export const { updateTags } = commentariesSlice.actions;

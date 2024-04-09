@@ -1,8 +1,9 @@
 import { type FC, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useAppDispatch } from 'store';
+import { useAppDispatch, useAppSelector } from 'store';
 import { fetchCommentaries } from 'store/commentaries';
 import { CommentaryList } from 'pages/components/CommentaryList';
+import { getAllTags } from 'store/selectors';
 
 function getPostId(id: string | undefined): number | null {
   if (id == null || id === '') {
@@ -22,6 +23,8 @@ export const CommentariesPage: FC = () => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
+  const allTags = useAppSelector(getAllTags);
+
   useEffect(() => {
     if (postId === null) {
       navigate('/posts');
@@ -30,5 +33,5 @@ export const CommentariesPage: FC = () => {
     }
   }, [postId, navigate, dispatch]);
 
-  return postId == null ? null : <CommentaryList postId={postId} />;
+  return postId == null ? null : <CommentaryList postId={postId} allTags={allTags} />;
 };
