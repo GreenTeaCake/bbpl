@@ -28,6 +28,12 @@ import { addReply, updateTags } from 'store/commentaries';
 import { useAppDispatch } from 'store';
 import type { FilterOptionsState } from '@mui/material';
 import partition from 'lodash/fp/partition';
+import truncate from 'lodash/fp/truncate';
+
+const truncateTag = truncate({
+  length: 24,
+  omission: '',
+});
 
 export type CommentaryListItemProps = {
   allTags: Set<Tag>;
@@ -58,7 +64,8 @@ export const CommentaryListItem: FC<CommentaryListItemProps> = (props) => {
       const [[newOption], regularOptions] = partition<Option>((o) => o.inputValue)(newValue);
       const newTags = regularOptions.map((o) => o.label);
       if (newOption) {
-        newTags.push(newOption.inputValue!);
+        const truncated = truncateTag(newOption.inputValue!);
+        newTags.push(truncated);
       }
       dispatch(updateTags({ commentaryId, tags: newTags }));
     },
@@ -91,7 +98,11 @@ export const CommentaryListItem: FC<CommentaryListItemProps> = (props) => {
       const filtered = FILTER(input, state);
       const { inputValue } = state;
       if (inputValue.trim() !== '' && !filtered.length) {
-        filtered.push({ inputValue, label: `+ "${inputValue}"` });
+        const truncated = truncateTag(inputValue);
+        filtered.push({
+          inputValue: truncated,
+          label: `+ "${truncated}"`,
+        });
       }
       return filtered;
     },
