@@ -18,6 +18,11 @@ type UpdateTags = {
   tags: Tag[];
 };
 
+type AddReply = {
+  commentaryId: number;
+  reply: string;
+};
+
 export const commentariesSlice = createSlice({
   name: 'commentaries',
   initialState,
@@ -27,6 +32,13 @@ export const commentariesSlice = createSlice({
       const [[target], rest] = partition<Commentary>((c) => c.id === commentaryId)(state.value);
       if (target) {
         state.value = [...rest, { ...target, tags }];
+      }
+    },
+    addReply: (state, action: PayloadAction<AddReply>) => {
+      const { commentaryId, reply } = action.payload;
+      const [[target], rest] = partition<Commentary>((c) => c.id === commentaryId)(state.value);
+      if (target) {
+        state.value = [...rest, { ...target, replies: [...target.replies, reply] }];
       }
     },
   },
@@ -51,4 +63,4 @@ export const commentariesSlice = createSlice({
   },
 });
 
-export const { updateTags } = commentariesSlice.actions;
+export const { addReply, updateTags } = commentariesSlice.actions;
