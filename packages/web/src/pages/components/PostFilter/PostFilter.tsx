@@ -75,7 +75,7 @@ export const PostFilter: FC = () => {
     >
       <FormControl
         sx={{
-          width: '170px',
+          width: '200px',
         }}
       >
         <InputLabel>Filter by</InputLabel>
