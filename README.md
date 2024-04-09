@@ -39,5 +39,5 @@ $ pnpm format
 $ pnpm run -r test
 # start development environment
 $ pnpm run -r start
-# web is at http://localhost:5173/
+# web is at http://localhost:5173/posts
 ```

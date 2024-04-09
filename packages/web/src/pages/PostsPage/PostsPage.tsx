@@ -6,8 +6,8 @@ import { PostList } from 'pages/components/PostList';
 
 export const PostsPage: FC = () => {
   return (
-    <Grid container direction="row" spacing={2} m={4}>
-      <Grid item container direction="column" spacing={2} md={6}>
+    <Grid container direction="row" spacing={2}>
+      <Grid item container direction="column" spacing={2} md={5}>
         <Grid item>
           <PostFilter />
         </Grid>
@@ -15,7 +15,7 @@ export const PostsPage: FC = () => {
           <PostList />
         </Grid>
       </Grid>
-      <Grid item container direction="column" spacing={2}>
+      <Grid item container direction="column" spacing={2} md={7}>
         <Grid item>
           <Outlet />
         </Grid>

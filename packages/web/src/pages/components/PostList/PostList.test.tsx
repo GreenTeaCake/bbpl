@@ -25,7 +25,7 @@ export const setUpView = (posts: Post[], users: User[]) => {
   store.dispatch(setPosts(posts));
   store.dispatch(setUsers(users));
 
-  render(<PostListWithTestEnv />);
+  render(<PostListWithTestEnv initialEntries={['/posts']} />);
 };
 
 describe('PostList', () => {

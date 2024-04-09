@@ -64,7 +64,15 @@ export const PostFilter: FC = () => {
   }, [filterBy, query]);
 
   return (
-    <Stack spacing={2} direction="row" alignItems="center">
+    <Stack
+      alignItems="center"
+      direction="row"
+      justifyContent="space-between"
+      spacing={2}
+      sx={{
+        width: '100%',
+      }}
+    >
       <FormControl
         sx={{
           width: '170px',
@@ -82,7 +90,11 @@ export const PostFilter: FC = () => {
           })}
         </Select>
       </FormControl>
-      <FormControl fullWidth>
+      <FormControl
+        sx={{
+          width: '100%',
+        }}
+      >
         <TextField
           data-testid="query-input-wrapper"
           label="Query"
