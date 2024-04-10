@@ -14,10 +14,9 @@ export const getUsernamePredicate: PredicateFactory = (query) => {
     return stubTrue;
   }
 
-  const regexp = new RegExp(query.trim(), 'ig');
-
   return function usernamePredicate(postData) {
     const username = postData.user?.username;
+    const regexp = new RegExp(query.trim(), 'ig');
     return username ? regexp.test(username) : false;
   };
 };
@@ -39,9 +38,8 @@ export const getPostBodyPredicate: PredicateFactory = (query) => {
     return stubTrue;
   }
 
-  const regexp = new RegExp(query.trim(), 'ig');
-
   return function postBodyPredicate(postData) {
+    const regexp = new RegExp(query.trim(), 'ig');
     return regexp.test(postData.post.body);
   };
 };
